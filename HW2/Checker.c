@@ -16,7 +16,7 @@ with the program name i.e. Coordinator or Checker. The example section below dep
 
 int checkDivision(int divisor, int dividend)
 {
-    int pid = getpid();
+    pid_t pid = getpid();
     int returnVal = -1;
 
     // must print current process id, must match the one returned by the fork() command in step 3

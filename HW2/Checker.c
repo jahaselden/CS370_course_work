@@ -1,13 +1,14 @@
 
-#include <libgen.h>
-#include <stdbool.h>
-#include <stdio.h>
 #include <stdlib.h>
+#include <stdio.h>
 #include <unistd.h>
+#include <sys/types.h>
+#include <sys/wait.h>
+#include <sys/resource.h>
  
-int checkDivision(int divisor, int dividend)
+int checkDivision(int divisor, int dividend, int pid)
 {
-    pid_t pid = getpid();
+ 
     int returnVal = -1;
  
     // must print current process id, must match the one returned by the fork() command in step 3
@@ -30,9 +31,16 @@ int checkDivision(int divisor, int dividend)
     return returnVal;
 }
  
+int main(int argc, char **argv)
+{
+    if (argc != 3)
+    {
+        printf("incorrect number of args");
+        return -1;
+    }
  
-int main(int argc, char *argv[]){
+    pid_t pid = getpid();
     int divisor = atoi(argv[1]);
     int dividend = atoi(argv[2]);
-    return checkDivision(divisor, dividend);
+    return checkDivision(divisor, dividend, pid);
 }

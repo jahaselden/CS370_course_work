@@ -1,0 +1,4 @@
+to select multiple words on different lines - command + d to select each occurence
+create multiple cursors - option + click where cursor should go 
+
+https://www.youtube.com/watch?v=vJvF7Y9oEjc

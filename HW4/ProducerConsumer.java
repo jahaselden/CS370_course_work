@@ -14,7 +14,7 @@ public class ProducerConsumer {
 
         //start threads (.start() to execute their run() methods)
 
-        
+        System.out.println("Exiting!");
 
     }
 }

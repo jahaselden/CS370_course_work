@@ -17,14 +17,14 @@ public class Producer implements Runnable {
             //increase count
         }
 
-        for (int i = 1; i < 11; i++){
-            if (i * 100000 == count){
-                System.out.printf("Producer: Generated %d items, Cumulative value of generated items=%.3f\n", count, cumulative_value);
-            }
-        }
+        // for (int i = 1; i < 11; i++){
+        //     if (i * 100000 == count){
+        //         System.out.printf("Producer: Generated %d items, Cumulative value of generated items=%.3f\n", count, cumulative_value);
+        //     }
+        // }
 
-        if (count == 100000){
-            System.out.println("Producer: Finished generating 1,000,000 items");
-        }
+        // if (count == 100000){
+        //     System.out.println("Producer: Finished generating 1,000,000 items");
+        // }
     //while count < 1000000
 }

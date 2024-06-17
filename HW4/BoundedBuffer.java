@@ -1,22 +1,42 @@
-//buffer data structure (array[1000])
+public class BoundedBuffer {
 
-//buffer size variable: initialized to 1000
+    int BUFFER_SIZE = 1000;
+    Double[] buffer = new Double[BUFFER_SIZE];
+    int count = 0;
+    Double temp = 0.0;
 
-//in variable: next free position (for producer) 
-//in = (in + 1) % buffer_size
+    // in variable: next free position (for producer)
+    int in = 0;
+    // out variable: first full position (for consumer)
+    int out = 0;
 
-//out variable: first full position (for consumer)
-//out = (out + 1) % buffer_size
+    // consumes from the head of the buffer
+    public synchronized Double retrieve() throws InterruptedException {
+        while (count == 0) { // buffer is empty
+            wait();
+        }
 
+        temp = buffer[in];
 
-//retrieve method - synchronize on data structure?
-//consumes from the head of the buffer
-//if in == out, there are no items to consume (buffer is empty) 
-// (this could also mean the buffer is full??)
+        in = (in + 1) % buffer.length;
 
-//store method - synchronize on data structure?
-//adds to the tail of the buffer
-//if (in + 1) % buffer_size == out, no more slots to produce to (buffer is full)
+        count--;
+        notify();
+        return temp;
+    }
 
-//bounded circular buffer
+    // adds to the tail of the buffer
+    public synchronized void store(Double element) throws InterruptedException {
+        while (count == BUFFER_SIZE - 1) { // buffer is full
+            wait();
+        }
 
+        buffer[out] = element;
+
+        out = (out + 1) % BUFFER_SIZE;
+        
+        count++;
+        notify();
+    }
+
+}
